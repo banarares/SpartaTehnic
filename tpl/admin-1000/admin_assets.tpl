@@ -8,29 +8,7 @@
         <div class="content">
             <h2 class="tell_pb left">Assets Management</h2>
 
-            <div class="filter_holder {if $searched}activ{/if}" {if $searched}style="display:block;"{/if}>
-                <form id="filter_user_frm" action="{$admin_assets_url}" method="get">
-                    <input type="hidden" name="action" value="admin-assets">
-                    <input type="text" name="s_public_name" class="pb_input_title" placeholder="Public name"  id="s_public_name" value="{$s_public_name}"/>
-                     <select name="s_file_type" class=""  id="s_file_type" style="width: 150px!important;">
-                        <option value="">- file type -</option>
-                        <option value="image" {if $s_file_type == 'image'} selected {/if} >image</option>
-                        <option value="document" {if $s_file_type == 'document'} selected {/if} >document</option>
-                        <option value="sound" {if $s_file_type == 'sound'} selected {/if} >sound</option>
-                    </select>
-                    <input type="text" name="s_date_start" class="pb_input_title datepicker" placeholder="Start Date"  id="s_date_start" value="{$s_date_start}"/> -
-                    <input type="text" name="s_date_end" class="pb_input_title datepicker" placeholder="End Date"  id="s_date_end" value="{$s_date_end}"/>
-                    <input type="submit" name="Submit" value="Search" class="search" />
-                    <input type="button" name="Reset" value="Reset" class="reset-btn" />
-
-                </form>
-            </div>
-
-            <div class="clear" style="height:15px;"> </div>
-
             <div><a href="javascript:void(0);"  id="new_file_trigger">Upload New File</a></div>
-
-            <div class="clear" style="height:15px;"> </div>
 
             <div class="error_message" id="asset_error_message">
 
@@ -41,7 +19,7 @@
 
             </div>
 
-            <div class="clear" ></div>
+            <div class="clear"></div>
 
             <form name="problem" id="form_files" class="form_users" action="{$admin_assets_add_url}" method="post" style="display: {if $error}block{else}none{/if};">
                 <div class="clear" style="height:15px;"> </div>
@@ -81,6 +59,7 @@
                 </script>
             {/if}
 
+            {include file="{$tpl_folder}/admin_filter_assets.tpl"}
             {include file="{$tpl_folder}/assets_list.tpl"}
         </div>
 

@@ -5,15 +5,27 @@ html, body{   overflow-x: hidden;  }
 .content{  }
 .master-header-admin a span img{ width:89px; margin:5px; }
 #meniu-top{ margin-right:auto; }
+.nav-up {
+    top: -90px;
+}
+.calendar_entry{ display: block; background: url('../img/calendar_small.png') no-repeat; background-size: 18px 18px ; overflow: hidden; padding-left:25px; }
+.shadowed-border{ background:#eee; margin-top:10px; padding:20px; border-bottom:1px solid #ccc;-webkit-box-shadow: 0px 4px 5px -5px rgba(0,0,0,0.75);-moz-box-shadow: 0px 4px 5px -5px rgba(0,0,0,0.75);box-shadow: 0px 4px 5px -5px rgba(0,0,0,0.75); }
+.shadowed-border h1, .shadowed-border h2, .shadowed-border h3, .shadowed-border h4, .shadowed-border h5{ margin-top:5px; }
+.shadowed-border p {     text-align: justify;     text-justify: inter-word; }
 .button-more {margin-top:0;margin-bottom:-10px; }
 span.sprite-more-icon.button-more{ display:block; }
 #loading img{ width:50px; }
 .button-right-wrapper{ width:10px;height:20px;float:right; }
-.button-right-wrapper input{ margin: 0;
-  padding: 0;
-  width: 10px;
-   -moz-background:red; 
- }
+.button-right-wrapper input{ margin: 0;   padding: 0;   width: 10px;    -moz-background:red;   }
+.articles_menu ul { padding:10px; background:#fff;margin:10px; list-style-type: none; }
+.articles_menu ul li{ margin:1px; font-weight: bold;  }
+.articles_menu ul li a{ font-weight: normal; display:block; margin:0; padding:10px; }
+.articles_menu ul li:hover{ background:#104a91; color:#000; }
+.articles_menu ul li a:hover{ color:#ccc;  text-decoration: none; }
+.active_art{ background:#104a91; color:#000; font-weight: bold; }
+.active_art a{ color:#fff;  }
+.pure-menu-heading{ padding:10px; }
+.search-button-wrapper{ float:right;padding-top:10px;height:30px;padding-bottom:10px; } 
 ul#admin_top_menu li:hover ul{ margin-top:-5px;  }
 .slicknav_menu{ height:60px; }
 .join_now_text{ margin-left:-7px; }
@@ -1156,4 +1168,190 @@ button.add_to_cart:hover{ background : #0a2d5d; color:#fff; font-weight: bold;}
   .sprite-icon-tubmlr { background-position: -920px -908px; width: 18px; height: 18px; display:inline-block; }
   .sprite-icon-twitter { background-position: -940px -908px; width: 18px; height: 18px; display:inline-block; }
   .sprite-search-icon { background-position: -960px -908px; width: 15px; height: 15px; display:inline-block; }
+}
+
+
+.pagination-wrapper{ height:60px;margin-top:10px; }
+.paginare
+{
+
+
+    
+}
+
+.paginare.bottom
+{
+    margin-top: 10px !important;
+}
+
+
+ul.list_pagination
+{
+    list-style: none;
+}
+
+ul.list_pagination>li, div.carousel-control
+{
+    float:left;
+    
+    margin: 0px;
+    margin-right:10px!important;
+}
+
+ul.list_pagination>li:last-child
+{
+    margin-right:0px;
+}
+ul.list_pagination>li div, div.carousel-control, ul.list_pagination>li a
+{
+    min-width: 20px;
+    height: 18px;
+    display: block;
+    text-align: center;
+    font-family: Verdana;
+    font-size: 11px;
+    font-weight: bold;
+    color: #363636;
+    border: 1px solid #AAAAAA;
+    border-radius: 3px 3px 3px 3px;
+    cursor: pointer;
+    text-decoration:none;
+
+}
+
+ul.list_pagination>li div:hover, div.carousel-control:hover, ul.list_pagination>li a:hover
+{
+    background-color: #0088CC;
+    border: 1px solid #0088CC;
+    border-radius: 3px;
+    color: white;
+    cursor: pointer;
+    text-decoration:none;
+
+}
+
+ul.list_pagination>li div.curent_item, ul.list_pagination>li a.curent_item
+{
+    background-color: #0088CC;
+    border: 1px solid #0088CC;
+    border-radius: 3px;
+    color: white;
+    cursor: pointer;
+    text-decoration:none;
+
+}
+
+ul#carousel-nav-hp.list_pagination>li div.curent_item, ul#carousel-nav-hp.list_pagination>li a.curent_item
+{
+    background-color: #aaaaaa;
+    border: 1px solid #aaaaaa;
+    text-decoration:none;
+
+}
+ul#carousel-nav-hp.list_pagination>li div:hover, ul#carousel-nav-hp.list_pagination>li a:hover
+{
+    background-color: #aaaaaa;
+    border: 1px solid #aaaaaa;
+    text-decoration:none;
+
+}
+
+ul.list_pagination>li div.to_left, div a.to_left, .carousel-control.to_left, ul.list_pagination>li a.to_left
+{
+    text-decoration:none;
+
+}
+
+ul.list_pagination>li div.to_right, div a.to_right, .carousel-control.to_right, ul.list_pagination>li a.to_right
+{
+
+    text-decoration:none;
+}
+
+ul.list_pagination > li div.to_left_left, ul.list_pagination > li a.to_left_left  {
+
+}
+
+ul.list_pagination > li div.to_right_right, ul.list_pagination > li a.to_right_right  {
+
+}
+
+.cd-top.cd-is-visible {
+  /* the button becomes visible */
+  visibility: visible;
+  opacity: 1;
+}
+.cd-top.cd-fade-out {
+  /* if the user keeps scrolling down, the button is out of focus and becomes less visible */
+  opacity: .5;
+}
+
+  /* -------------------------------- 
+
+Modules - reusable parts of our design
+
+-------------------------------- */
+.cd-container {
+  width: 90%;
+  max-width: 768px;
+  margin: 2em auto;
+}
+.cd-container::after {
+  /* clearfix */
+  content: '';
+  display: table;
+  clear: both;
+}
+
+.cd-top {
+  display: inline-block;
+  height: 40px;
+  width: 40px;
+  position: fixed;
+  bottom: 40px;
+  right: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+  /* image replacement properties */
+  overflow: hidden;
+  text-indent: 100%;
+  white-space: nowrap;
+  background: rgba(16, 64, 145, 0.8) url(../img/up-top-arrow.png) no-repeat center 50%;
+  visibility: hidden;
+  opacity: 0;
+  -webkit-transition: opacity .3s 0s, visibility 0s .3s;
+  -moz-transition: opacity .3s 0s, visibility 0s .3s;
+  transition: opacity .3s 0s, visibility 0s .3s;
+}
+.cd-top.cd-is-visible, .cd-top.cd-fade-out, .no-touch .cd-top:hover {
+  -webkit-transition: opacity .3s 0s, visibility 0s 0s;
+  -moz-transition: opacity .3s 0s, visibility 0s 0s;
+  transition: opacity .3s 0s, visibility 0s 0s;
+}
+.cd-top.cd-is-visible {
+  /* the button becomes visible */
+  visibility: visible;
+  opacity: 1;
+}
+.cd-top.cd-fade-out {
+  /* if the user keeps scrolling down, the button is out of focus and becomes less visible */
+  opacity: .5;
+}
+.no-touch .cd-top:hover {
+  background-color: #e86256;
+  opacity: 1;
+}
+
+@media only screen and (min-width: 768px) {
+  .cd-top {
+    right: 20px;
+    bottom: 20px;
+  }
+}
+@media only screen and (min-width: 1024px) {
+  .cd-top {
+    height: 60px;
+    width: 60px;
+    right: 30px;
+    bottom: 30px;
+  }
 }

@@ -1,5 +1,5 @@
 <body>
-  <header class="master-header-admin" >
+  <header class="master-header-admin nav-down" >
 
       <a href="{$root_url}">
       {if $site_logo}
@@ -30,8 +30,8 @@
 
   </header>
 
-<div>
+<div style="">
     {if $is_admin}
-    {include file="{$tpl_folder}/admin-menu.tpl"}
+      {include file="{$tpl_folder}/admin-menu.tpl"}
     {/if}
 </div>

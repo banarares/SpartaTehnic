@@ -15,7 +15,7 @@
         <div class="sprite-bg-cell-1 cell_1_2 text-center join_us white_color" >
               <h4>{$search_style} "THE GOLD STANDARD IN BORROWING AND LENDING"</h4>
               <p><a href="?action=products">Lorem</a>  ipsum dolor sit amet, consectetur adipiscing elit. <br />
-              In <a href="?action=about">bibendum</a> massa non ligula pharetra dictum. <br />
+              In bibendum massa non ligula pharetra dictum. <br />
               Vestibulum ultrices, nulla ut molestie scelerisque</P>
         </div>
       </div>
@@ -49,14 +49,14 @@
       </div>
     </a>
 
-    <a href="#" class="sprite-box-3 cell_1_4" >
+    <a href="?action=about" class="sprite-box-3 cell_1_4" >
       <div class="col-xs-3 text-center dark-layer sprite-shadow-box" >
         <h4 >ABOUT WE SHARE</h4>
         <p>Lorem ipsum dolor sit amet, consectetur </p>
       </div>
     </a>
 
-    <a href="#" class="cell_1_4 bg-box-4" >
+    <a href="?action=all-blogs" class="cell_1_4 bg-box-4" >
       <div class="col-xs-3 text-center dark-layer sprite-shadow-box" >
 
           <h4 >BLOG</h4>

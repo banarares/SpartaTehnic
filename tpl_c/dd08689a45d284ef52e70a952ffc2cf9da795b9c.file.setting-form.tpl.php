@@ -1,6 +1,6 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2016-04-27 12:11:13
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2016-04-30 01:18:17
          compiled from "/var/www/akiva//tpl/admin-1000/setting-form.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:433209306572082311ee7c4-56551596%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:9606447325723dda9c57c80-16122309%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
@@ -11,7 +11,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '433209306572082311ee7c4-56551596',
+  'nocache_hash' => '9606447325723dda9c57c80-16122309',
   'function' => 
   array (
   ),
@@ -22,9 +22,9 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_572082311f7ca3_13606961',
+  'unifunc' => 'content_5723dda9c62757_92089071',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_572082311f7ca3_13606961')) {function content_572082311f7ca3_13606961($_smarty_tpl) {?><div class="error_message" id="error_message">
+<?php if ($_valid && !is_callable('content_5723dda9c62757_92089071')) {function content_5723dda9c62757_92089071($_smarty_tpl) {?><div class="error_message" id="error_message">
 
     <?php if ($_smarty_tpl->tpl_vars['error']->value!='') {?>
         <?php echo $_smarty_tpl->tpl_vars['error']->value;?>

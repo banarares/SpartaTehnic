@@ -10,7 +10,12 @@ class Assets{
   {
     global $config;
 
-    $thumb_path = str_replace('assets', 'assets/thumbs',$path);
+    if (file_exists($path)) {
+      return $path;
+    }else{
+      
+
+    $thumb_path = str_replace('assets', 'assets/thumbs', $path);
 
       $image = new Imagick($path);
       // If 0 is provided as a width or height parameter,
@@ -21,9 +26,10 @@ class Assets{
       // Writes resultant image to output directory
       $image->writeImage($thumb_path);
 
-      $thumb_path = str_replace($config['ASSETS_DIR'], '',$thumb_path);
+      $thumb_path = str_replace($config['ASSETS_PATH_DIR'], '',$thumb_path);
 
     return $thumb_path;
+    }
   }
 
 
@@ -45,7 +51,8 @@ class Assets{
 
   }
 
-  function add_asset($asset_data, $is_moderated = 0){
+  function add_asset($asset_data, $is_moderated = 0)
+  {
     global $db_connection, $config;
 
     if (!isset($asset_data['file']) || $asset_data['file'] == '')
@@ -53,9 +60,10 @@ class Assets{
         throw new Exception("File is mandatory");
     }
 
-    $target_path = $config['ASSETS_DIR']."/";
+    $target_path = $config['ASSETS_PATH_DIR']."/"; 
 
-    $target_path = $target_path . $asset_data['local_file_name'].'.'.$asset_data['file_extension'];
+    $target_path = $target_path . $asset_data['local_file_name'];
+ 
 
     if(move_uploaded_file($asset_data['file']['tmp_name'], $target_path))
     {
@@ -159,12 +167,12 @@ class Assets{
           while (!$result->EOF)
           {
               $assets_list[] = $result->fields;
-              $asset_path_file = $config['ASSETS_DIR'].'/'.$assets_list[$i]['local_file_name'].".".$assets_list[$i]['file_extension'];
-              $thumb_path_file = $config['ASSETS_DIR'].'/thumbs/'.$assets_list[$i]['local_file_name'].".".$assets_list[$i]['file_extension'];
+              $asset_path_file = $config['ASSETS_DIR'].'/'.$assets_list[$i]['local_file_name'];
+              $thumb_path_file = $config['ASSETS_DIR'].'/thumbs/'.$assets_list[$i]['local_file_name'];
               #create img_to_thumb if it doesn't exist.
               if(file_exists($thumb_path_file))
               {
-                $assets_list[$i]['image_out'] = '/thumbs/'.$assets_list[$i]['local_file_name'].".".$assets_list[$i]['file_extension'];
+                $assets_list[$i]['image_out'] = '/thumbs/'.$assets_list[$i]['local_file_name'];
               }
               else
               {

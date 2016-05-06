@@ -1,130 +1,155 @@
-<!doctype html>
-<html>
+{include file="{$tpl_folder_admin}/header-admin.tpl"}
+
 <head>
-    <title>Admin CMS MS</title>
-
-    <meta name="viewport" content="width=1024" />
-    <meta charset="utf-8" />
-
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet" >
-
-    <link href="{$root_url}/css/style.css" rel="stylesheet" type="text/css" />
-
-    <link href="{$root_url}/admin-1000/css/style_admin.css" rel="stylesheet" type="text/css" />
-    <link href="{$root_url}/admin-1000/css/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css" />
-
-
-    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/themes/smoothness/jquery-ui.css">
-
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-    <script src="{$root_url}/admin-1000/js/bootstrap-datepicker.min.js"></script>
-
-    {if $action == 'admin-assets'}
-        <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script>
-    {/if}
-
-
-
-    <script src="{$root_url}/admin-1000/js/main_admin.js"></script>
-
-
+            {if $current_assets == 1}
+                <script>
+                    //get threads for some defaults links
+                    current_assets();
+                </script>
+            {/if}
 </head>
 <body>
+
+
 <div class="wraper">
     <div class="content-wrap page">
 
         <div class="content">
+        <h2 class="tell_pb left">{$pageTitle}</h2>
+
+            {include file="{$tpl_folder_admin}/admin_filter_browse_assets.tpl"}
+
             <input type="hidden" name="CKEditorFuncNum" id="CKEditorFuncNum" value="{$CKEditorFuncNum}">
-            <h2 class="tell_pb left">{$pageTitle}</h2>
+            
             <div id="loading" {if $current_thread == 1}style="text-align: center; display:block; margin:25px 0;"{else}style="text-align: center; display:none; margin:25px 0;"{/if}><img src="{$IMAGES_PATH_DIR}/loading.gif"></div>
             <div class="clear">&nbsp;</div>
-            <div id="list_results">
-                {if $no_of_page>0}
-                    <div class="last_item" style="display: none;">{$no_of_page}</div>
-                    <div class="paginare">
-                        <ul class="list_pagination">
-                            <li>
-                                <a  href="{$link_pagination}#{$link_ajax}pagina=1" class="to_left_left" onclick="pagination_assets('1', 'browser', '{$assets_type}');return false;"><span aria-hidden="true" class="glyphicon glyphicon-step-backward"></span></a>
-                            </li>
-                            <li><a  href="{$link_pagination}#{$link_ajax}pagina={$page_no-1}" class="to_left" onclick="javascript:prev_assets('browser', '{$assets_type}');return false;"><span aria-hidden="true" class="glyphicon glyphicon-chevron-left"></span></a></li>
-                            {for $start=1 to $no_of_page}
-                                {if $start >= $min_page && $start <= $max_page}
-                                    <li {if $start == $page_no} class="curent_item"{/if}>
-                                        <a   href="{$link_pagination}#{$link_ajax}pagina={$start}" class="pagination_item {if $start == $page_no} curent_item{/if}" id="{$start}" onclick="pagination_assets('{$start}', 'browser', '{$assets_type}');return false;">{$start}</a>
-                                    </li>
-                                {/if}
-                            {/for}
-                            <li>
-                                <a  href="{$link_pagination}#{$link_ajax}pagina={$page_no+1}" class="to_right" onclick="javascript:next_assets('browser', '{$assets_type}');return false;"><span aria-hidden="true" class="glyphicon glyphicon-chevron-right"></span></a></li>
-                            <li><a  href="{$link_pagination}#{$link_ajax}pagina={$no_of_page}" class="to_right_right" onclick="pagination_assets('{$no_of_page}', 'browser', '{$assets_type}');return false;"><span aria-hidden="true" class="glyphicon glyphicon-step-forward"></span></a></li>
-                        </ul>
-                    </div>
-                {/if}
-                <div class="clear">&nbsp;</div>
 
 
-                <div class="table-responsive">
-                    <table class="table table-hover">
-                        <thead>
-                        <tr>
-                            <th>Asset id</th>
-                            <th>Download</th>
-                            <th>Public name</th>
-                            <th>Type</th>
-                            <th>Size</th>
-                            <th>Dimensions</th>
-                            <th>Description</th>
-                            <th>Created Date</th>
-                            <th>Actions</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {foreach from=$allAssets item=assets name=assets}
-                            <tr>
-                                <td>{$assets.asset_id}</td> 
-                                <td>{if $assets.file_type == 'image'}<a href="{assets_path_dir}/thumbs/{$assets.local_file_name}.{$assets.file_extension}" target="_blank"><img src="../assets/thumbs/{$assets.local_file_name}.{$assets.file_extension}" width="20" alt="{$assets.file_description}"></a>{else}<a href="{$assets_path_dir}/{$assets.local_file_name}" target="_blank">View File</a>{/if}</td>
-                                <td>{$assets.public_name}</td>
-                                <td>{$assets.file_type}</td>
-                                <td>{$assets.file_size}</td>
-                                <td>{$assets.image_width} x {$assets.image_height}</td>
-                                <td>{$assets.file_description}</td>
-                                <td>{$assets.creation_date}</td>
-                                <td width="100">
-                                    <button name="select_asset" onclick="select_asset(this);" class="select_asset btn btn-default" url-path="{$assets_path_dir}/{$assets.local_file_name}" img-alt="{$assets.file_description}">Select asset</button>
-                                </td>
-                            </tr>
-                            {foreachelse}
-                            <tr>
-                                <td colspan="7" class="text-center">No results</td>
-                            </tr>
-                        {/foreach}
-                        </tbody>
-                    </table>
+
+            <div id="list_results">            
+
+
+
+            {if $no_of_page>0}
+                <div class="last_item" style="display: none;">{$no_of_page}</div>
+                <div class="paginare">
+                    <ul class="list_pagination">
+                        <li>
+                            <a  href="{$link_pagination}#{$link_ajax}pagina=1" class="to_left_left" onclick="pagination_browse_assets('1');return false;"><span aria-hidden="true" class="glyphicon glyphicon-step-backward"></span></a>
+                        </li>
+                        <li><a  href="{$link_pagination}#{$link_ajax}pagina={$page_no-1}" class="to_left" onclick="javascript:prev_browse_assets();return false;"><span aria-hidden="true" class="glyphicon glyphicon-chevron-left"></span></a></li>
+                        {for $start=1 to $no_of_page}
+                            {if $start >= $min_page && $start <= $max_page}
+                                <li {if $start == $page_no} class="curent_item"{/if}>
+                                    <a   href="{$link_pagination}#{$link_ajax}pagina={$start}" class="pagination_item {if $start == $page_no} curent_item{/if}" id="{$start}" onclick="pagination_browse_assets('{$start}');return false;">{$start}</a>
+                                </li>
+                            {/if}
+                        {/for}
+                        <li>
+                            <a  href="{$link_pagination}#{$link_ajax}pagina={$page_no+1}" class="to_right" onclick="javascript:next_browse_assets();return false;"><span aria-hidden="true" class="glyphicon glyphicon-chevron-right"></span></a></li>
+                        <li><a  href="{$link_pagination}#{$link_ajax}pagina={$no_of_page}" class="to_right_right" onclick="pagination_browse_assets('{$no_of_page}');return false;"><span aria-hidden="true" class="glyphicon glyphicon-step-forward"></span></a></li>
+                    </ul>
                 </div>
+            {/if}
 
-                {if $no_of_page>0}
-                    <div class="paginare  bottom">
-                        <ul class="list_pagination">
-                            <li>
-                                <a  href="{$link_pagination}#{$link_ajax}pagina=1" class="to_left_left" onclick="pagination_assets('1', 'browser', '{$assets_type}');return false;"><span aria-hidden="true" class="glyphicon glyphicon-step-backward"></span></a>
-                            </li>
-                            <li><a  href="{$link_pagination}#{$link_ajax}pagina={$page_no-1}" class="to_left" onclick="javascript:prev_assets('browser', '{$assets_type}');return false;"><span aria-hidden="true" class="glyphicon glyphicon-chevron-left"></span></a></li>
-                            {for $start=1 to $no_of_page}
-                                {if $start >= $min_page && $start <= $max_page}
-                                    <li {if $start == $page_no} class="curent_item"{/if}>
-                                        <a   href="{$link_pagination}#{$link_ajax}pagina={$start}" class="pagination_item {if $start == $page_no} curent_item{/if}" id="{$start}botom" onclick="pagination_assets('{$start}', 'browser', '{$assets_type}');return false;">{$start}</a>
-                                    </li>
-                                {/if}
-                            {/for}
-                            <li>
-                                <a  href="{$link_pagination}#{$link_ajax}pagina={$page_no+1}" class="to_right" onclick="javascript:next_assets('browser', '{$assets_type}');return false;"><span aria-hidden="true" class="glyphicon glyphicon-chevron-right"></span></a></li>
-                            <li><a  href="{$link_pagination}#{$link_ajax}pagina={$no_of_page}" class="to_right_right" onclick="pagination_assets('{$no_of_page}', 'browser', '{$assets_type}');return false;"><span aria-hidden="true" class="glyphicon glyphicon-step-forward"></span></a></li>
-                        </ul>
-                    </div>
-                {/if}
+            <div class="clear">&nbsp;</div>
+            <div id="loading" {if $current_thread == 1}style="text-align: center; display:block; margin:25px 0;"{else}style="text-align: center; display:none; margin:25px 0;"{/if}><img src="{$images_path_dir}/loading.gif"></div>
+            <div class="clear">&nbsp;</div>
 
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                    <tr> 
+                        <th class="filter filter_user_id format_id">Id
+                            <a href="{$link_pagination}?pageId=1&input_file_url=social_media_image&type=image&source=ckeditor{if $s_asset_id!==0}&s_asset_id={$s_asset_id}{/if}&type={$s_file_type}&filter=asset_id&s_name={$s_name}&s_description={$s_description}&s_date_start={$s_date_start}&s_date_end={$s_date_end}&sort={if $sort==0}1{else}0{/if}#{$link_ajax}pagina=1">
+                                <span class="{$arrow_id}"></span>
+                            </a>                
+                        </th>
+                         
+                        <th class="filter filter_user_name format_name">Public name
+                            <a href="{$link_pagination}?pageId=1&input_file_url=social_media_image&type=image&source=non_ckeditor{if $s_asset_id!==0}&s_asset_id={$s_asset_id}{/if}&type={$s_file_type}&filter=public_name&s_name={$s_name}&s_description={$s_description}&s_date_start={$s_date_start}&s_date_end={$s_date_end}&sort={if $sort==0}1{else}0{/if}#{$link_ajax}pagina=1">
+                                <span class="{$arrow_name}"></span>
+                            </a>
+                        </th>
+                        <th class="format_type">Type
+                           <a href="{$link_pagination}?pageId=1&input_file_url=social_media_image&type=image&source=non_ckeditor{if $s_asset_id!==0}&s_asset_id={$s_asset_id}{/if}&type={$s_file_type}&filter=file_type&s_name={$s_name}&s_description={$s_description}&s_date_start={$s_date_start}&s_date_end={$s_date_end}&sort={if $sort==0}1{else}0{/if}#{$link_ajax}pagina=1">
+                                <span class="{$arrow_type}"></span>
+                            </a>
+                        </th>
+                        <th>Size
+                           <a href="{$link_pagination}?pageId=1&input_file_url=social_media_image&type=image&source=non_ckeditor{if $s_asset_id!==0}&s_asset_id={$s_asset_id}{/if}&type={$s_file_type}&filter=file_size&s_name={$s_name}&s_description={$s_description}&s_date_start={$s_date_start}&s_date_end={$s_date_end}&sort={if $sort==0}1{else}0{/if}#{$link_ajax}pagina=1">
+                                <span class="{$arrow_size}"></span>
+                            </a>
+                        </th>
+                        
+                        <th class="filter filter_user_name format_name">Description
+                           <a href="{$link_pagination}?pageId=1&input_file_url=social_media_image&type=image&source=non_ckeditor{if $s_asset_id!==0}&s_asset_id={$s_asset_id}{/if}&type={$s_file_type}&filter=file_description&s_name={$s_name}&s_description={$s_description}&s_date_start={$s_date_start}&s_date_end={$s_date_end}&sort={if $sort==0}1{else}0{/if}#{$link_ajax}pagina=1">
+                                <span class="{$arrow_description}"></span>
+                            </a>
+                        </th>
+                        <th class="format_creation_date">Created Date
+                           <a href="{$link_pagination}?pageId=1&input_file_url=social_media_image&type=image&source=non_ckeditor{if $s_asset_id!==0}&s_asset_id={$s_asset_id}{/if}&type={$s_file_type}&filter=creation_date&s_name={$s_name}&s_description={$s_description}&s_date_start={$s_date_start}&s_date_end={$s_date_end}&sort={if $sort==0}1{else}0{/if}#{$link_ajax}pagina=1">
+                                <span class="{$arrow_date}"></span>
+                            </a>
+                        </th>
+                        <th class="format_dimensions">Dimensions</th>
+                        <th>Download</th>
+                        <th class="format_actions">Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {foreach from=$allAssets item=assets name=assets}
+                        <tr>
+                            <td>{$assets.asset_id}</td>                    
+                            <td>{$assets.public_name}</td>
+                            <td>{$assets.file_type}
+                              {if $assets.file_type eq 'image'}
+                              <br />
+                              {$assets.file_extension}
+                              {/if}
+                            </td>
+                            <td>{$assets.file_size}</td>
+                            <td>{$assets.file_description}</td>
+                            <td>{$assets.creation_date}</td>
+                            <td>{$assets.image_width} x {$assets.image_height}</td>
+                            <td>{if $assets.file_type == 'image'}<img src="../assets/{$assets.local_file_name}" width="180"> {/if}<a href="../assets/{$assets.local_file_name}" target="_blank">Download</a></td>
+                            <td width="100">
+                            
+                            <button name="select_asset" onclick="select_asset(this);" class="select_asset btn btn-default" url-path="{$assets_path_dir}/{$assets.local_file_name}" img-alt="{$assets.file_description}">Select asset</button>
+                            
+                            </td>
+
+                        </tr>
+                    {foreachelse}
+                        <tr>
+                            <td colspan="9" class="text-center">No results</td>
+                        </tr>
+                    {/foreach}
+                    </tbody>
+                </table>
             </div>
+
+            {if $no_of_page>0}
+                <div class="paginare  bottom">
+                    <ul class="list_pagination">
+                        <li>
+                            <a  href="{$link_pagination}#{$link_ajax}pagina=1" class="to_left_left" onclick="pagination_browse_assets('1');return false;"><span aria-hidden="true" class="glyphicon glyphicon-step-backward"></span></a>
+                        </li>
+                        <li><a  href="{$link_pagination}#{$link_ajax}pagina={$page_no-1}" class="to_left" onclick="javascript:prev_browse_assets();return false;"><span aria-hidden="true" class="glyphicon glyphicon-chevron-left"></span></a></li>
+                        {for $start=1 to $no_of_page}
+                            {if $start >= $min_page && $start <= $max_page}
+                                <li {if $start == $page_no} class="curent_item"{/if}>
+                                    <a   href="{$link_pagination}#{$link_ajax}pagina={$start}" class="pagination_item {if $start == $page_no} curent_item{/if}" id="{$start}botom" onclick="pagination_browse_assets('{$start}');return false;">{$start}</a>
+                                </li>
+                            {/if}
+                        {/for}
+                        <li>
+                            <a  href="{$link_pagination}#{$link_ajax}pagina={$page_no+1}" class="to_right" onclick="javascript:next_browse_assets();return false;"><span aria-hidden="true" class="glyphicon glyphicon-chevron-right"></span></a></li>
+                        <li><a  href="{$link_pagination}#{$link_ajax}pagina={$no_of_page}" class="to_right_right" onclick="pagination_browse_assets('{$no_of_page}');return false;"><span aria-hidden="true" class="glyphicon glyphicon-step-forward"></span></a></li>
+                    </ul>
+                </div>
+            {/if}
+
         </div>
 
     </div>
@@ -227,3 +252,4 @@
 {/literal}
 </body>
 </html>
+

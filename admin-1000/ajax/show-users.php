@@ -106,7 +106,7 @@ $arrow_array= array('arrow_id','arrow_name','arrow_email','arrow_date','arrow_ip
             break;
         }
 
-#var_dump($selected_arrow);
+
 
 $arrow_idle = 'sprite-down-arrow-idle';
 $arrow_up = 'sprite-up-arrow';
@@ -148,9 +148,9 @@ if( $filter != '' && $filter != 'undefined'){
     $order_by = $filter;
 }else{      
     $order_by = 'user_id';
-   
 }
 
+$smarty->assign('filter',$filter);
 
 $users_db = $Users -> fetch_users($start, $limit, $order_by, $sort_by, implode(' ', $where));
 #$where[] = " AND usergroup_id = '1' ";
@@ -184,7 +184,7 @@ else
 }
 //print_r('<pre>');print_r($min_page . ' -> '.$max_page);print_r('</pre>');
 
-$smarty->assign('filter',$filter);
+
 
 $smarty->assign('no_of_page',$nr_of_page);
 $smarty->assign('type',$type);

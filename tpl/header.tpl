@@ -58,8 +58,12 @@
   <script src="{$root_url}/bxslider/jquery.bxslider.js"></script>
   <script src="{$root_url}/bxslider/jquery.bxslider.min.js"></script>
 
+  <script src="{$root_url}/js/jquery.slicknav.js"></script>
   <script src="{$root_url}/js/main.js"></script>
 
+    {if $has_escaped_fragment}
+        <link rel="canonical" href="{$canonical_url}" />
+    {/if}
 
 </head>
 

@@ -1,17 +1,17 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2016-04-27 13:46:34
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2016-05-06 16:50:22
          compiled from "/var/www/akiva//tpl/header.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:9511702025720988aa2bee2-80576966%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:1316337652572ca11eeee1a3-50094408%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     '0a1d1f1749083562762e42551d152ceb2fd8777a' => 
     array (
       0 => '/var/www/akiva//tpl/header.tpl',
-      1 => 1460705393,
+      1 => 1462449209,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '9511702025720988aa2bee2-80576966',
+  'nocache_hash' => '1316337652572ca11eeee1a3-50094408',
   'function' => 
   array (
   ),
@@ -20,13 +20,15 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'page_title' => 0,
     'root_url' => 0,
     'sitekey' => 0,
+    'has_escaped_fragment' => 0,
+    'canonical_url' => 0,
     'tpl_folder' => 0,
   ),
   'has_nocache_code' => false,
   'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_5720988aa38e12_82976690',
+  'unifunc' => 'content_572ca11ef02a15_50316477',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_5720988aa38e12_82976690')) {function content_5720988aa38e12_82976690($_smarty_tpl) {?><!DOCTYPE html>
+<?php if ($_valid && !is_callable('content_572ca11ef02a15_50316477')) {function content_572ca11ef02a15_50316477($_smarty_tpl) {?><!DOCTYPE html>
 <html lang="en">
 <head>
   <!-- Basic Page Needs
@@ -115,9 +117,17 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 
   <?php echo '<script'; ?>
  src="<?php echo $_smarty_tpl->tpl_vars['root_url']->value;?>
+/js/jquery.slicknav.js"><?php echo '</script'; ?>
+>
+  <?php echo '<script'; ?>
+ src="<?php echo $_smarty_tpl->tpl_vars['root_url']->value;?>
 /js/main.js"><?php echo '</script'; ?>
 >
 
+    <?php if ($_smarty_tpl->tpl_vars['has_escaped_fragment']->value) {?>
+        <link rel="canonical" href="<?php echo $_smarty_tpl->tpl_vars['canonical_url']->value;?>
+" />
+    <?php }?>
 
 </head>
 

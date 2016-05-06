@@ -18,7 +18,7 @@
                   <label for="where">Where</label>
                   <input type="text" placeholder="City, State, Zip" id="where" class="block-small"  name="where" />
 
-                  <button type="submit" class="block-small">
+                  <button type="submit" class="block-small search-button-wrapper">
                     <span class="sprite-search-icon search_style" ></span> Search
                   </button>
                 </span>

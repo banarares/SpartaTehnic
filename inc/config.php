@@ -9,6 +9,8 @@ date_default_timezone_set('Europe/Bucharest');
 $config = array();
 $config['DEBUG'] = true;
 
+
+
 // Config for folders
 $config['BASE_DIR'] = '/var/www/akiva/';
 $config['LIB_DIR'] = '/var/www/lib/';
@@ -18,8 +20,13 @@ $config['MAX_UPLOAD_SIZE'] = 1000000; //1mb
 $config['MIN_NO_OF_CHAR'] = 5;
 $config['TMP_DIR'] = $config['BASE_DIR'] . '/tmp/';
 
+//Config for FRONT - END 
+$config['CT_NUMBER_OF_ARTICLES_PER_PAGE'] = 10;
+$config['CT_ALLBLOGS_SHORT_DESCRIPTION'] = 250;
 
 require $config['BASE_DIR'] .'/inc/ErrorHandler.php';
+require $config['BASE_DIR'] .'/inc/Articles.class.php';
+require $config['BASE_DIR'] .'/inc/Categories.class.php';
 //smarty start
 require_once($config['LIB_DIR'] . '/smarty/Smarty.class.php');
 $smarty = new Smarty();
@@ -129,3 +136,16 @@ $smarty->assign('tpl_folder_admin', $tpl_folder_admin);
 
 $tpl_folder = $config['BASE_DIR'] . '/tpl';
 $smarty->assign('tpl_folder', $tpl_folder);
+
+    function truncate($text, $count){
+    $trimed = '';
+    $text = str_replace("  ", " ", $text);
+    $string = explode(" ", $text);
+    for ( $wordCounter = 0; $wordCounter <= $count;$wordCounter++ ){
+        $trimed .= $string[$wordCounter];
+        if ( $wordCounter < $count ){ $trimed .= " "; }
+        else { $trimed .= "..."; }
+    }
+    $trimed = trim($trimed);
+    return $trimed;
+    }

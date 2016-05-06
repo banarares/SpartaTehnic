@@ -1,42 +1,26 @@
 {include file="{$tpl_folder}/header-admin.tpl"}
 {include file="{$tpl_folder}/admin-top.tpl"}
-
+{if $current_articles == 1}
+    <script> 
+        current_articles();
+    </script>
+{/if}
 <div class="wraper">
     <div class="content-wrap page">
 
         <div class="content">
-            <h2 class="tell_pb left">Articles</h2>
-
-            <div class="clear" style="height:15px;"> </div>
-            <div class="filter_holder {if $searched}activ{/if}" {if $searched}style="display:block;"{/if}>
-                <form id="filter_user_frm" action="{$admin_articles_url}" method="get">
-                    <input type="hidden" name="action" value="admin-articles">
-                    <input type="text" name="s_title" class="pb_input_title" placeholder="Name"  id="s_title" value="{$s_title}"/>
-                    <input type="text" name="s_date_start" class="pb_input_title datepicker" placeholder="Start Date"  id="s_date_start" value="{$s_date_start}"/> -
-                    <input type="text" name="s_date_end" class="pb_input_title datepicker" placeholder="End Date"  id="s_date_end" value="{$s_date_end}"/>
-
-                    <input type="submit" name="Submit" value="Search" class="search" />
-                    <input type="button" name="Reset" value="Reset" class="reset-btn" />
-
-                </form>
-            </div>
+            <h2 class="tell_pb left">Blog Management</h2>
 
             <div class="clear" style="height:15px;"> </div>
 
             <div><a href="javascript:void(0);"  onclick="article_item('', 'add', event);">Add New Article </a></div>
 
             <div class="clear" style="height:15px;"> </div>
+            {include file="{$tpl_folder}/admin_filter_articles.tpl"}
 
-            {if $current_articles == 1}
-                <script>
-                    //get threads for some defaults links
-                    current_articles();
-                </script>
-            {/if}
+            <div class="clear" style="height:15px;"> </div>
 
                 {include file="{$tpl_folder}/articles_list.tpl"}
-
-
         </div>
 
     </div>

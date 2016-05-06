@@ -1,6 +1,6 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2016-04-27 13:46:34
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2016-05-06 16:50:22
          compiled from "/var/www/akiva//tpl/footer.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:21073766285720988aa403e5-72668756%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:62246133572ca11ef1f055-29742806%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
@@ -11,7 +11,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '21073766285720988aa403e5-72668756',
+  'nocache_hash' => '62246133572ca11ef1f055-29742806',
   'function' => 
   array (
   ),
@@ -23,9 +23,9 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_5720988aa456f0_78898787',
+  'unifunc' => 'content_572ca11ef258e1_97163339',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_5720988aa456f0_78898787')) {function content_5720988aa456f0_78898787($_smarty_tpl) {?><!-- SUBSCRIBE SECTION -->
+<?php if ($_valid && !is_callable('content_572ca11ef258e1_97163339')) {function content_572ca11ef258e1_97163339($_smarty_tpl) {?><!-- SUBSCRIBE SECTION -->
   <div class="subscribe">
     <h2>
       <label for="subscribe_now" id="subscribe_label">Join our newsletter</label>

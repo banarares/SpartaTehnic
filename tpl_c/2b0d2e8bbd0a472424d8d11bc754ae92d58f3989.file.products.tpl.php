@@ -1,6 +1,6 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2016-04-21 09:19:01
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2016-05-06 12:07:21
          compiled from "/var/www/akiva/tpl/products.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:385630501571870d59c83f0-45976968%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:1953594262572c5ec9d2fc78-89397413%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
@@ -11,7 +11,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '385630501571870d59c83f0-45976968',
+  'nocache_hash' => '1953594262572c5ec9d2fc78-89397413',
   'function' => 
   array (
   ),
@@ -22,9 +22,9 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_571870d59dbba5_72642940',
+  'unifunc' => 'content_572c5ec9d40929_26463368',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_571870d59dbba5_72642940')) {function content_571870d59dbba5_72642940($_smarty_tpl) {?><?php echo $_smarty_tpl->getSubTemplate (((string)$_smarty_tpl->tpl_vars['tpl_folder']->value)."/header.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, null, array(), 0);?>
+<?php if ($_valid && !is_callable('content_572c5ec9d40929_26463368')) {function content_572c5ec9d40929_26463368($_smarty_tpl) {?><?php echo $_smarty_tpl->getSubTemplate (((string)$_smarty_tpl->tpl_vars['tpl_folder']->value)."/header.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, null, array(), 0);?>
 
 
 <?php if ($_smarty_tpl->tpl_vars['action']->value=="home") {?>

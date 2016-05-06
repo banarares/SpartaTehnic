@@ -1,38 +1,32 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2016-04-27 12:11:02
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2016-05-06 16:58:18
          compiled from "/var/www/akiva//tpl/admin-1000/admin_assets.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:47321419657208226d2f655-08802123%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:312448630572ca2fa16b0e2-68585638%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     'ed723c516388e726abbf69604042ed24d5d52bf3' => 
     array (
       0 => '/var/www/akiva//tpl/admin-1000/admin_assets.tpl',
-      1 => 1460624392,
+      1 => 1461831949,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '47321419657208226d2f655-08802123',
+  'nocache_hash' => '312448630572ca2fa16b0e2-68585638',
   'function' => 
   array (
   ),
   'variables' => 
   array (
     'tpl_folder' => 0,
-    'searched' => 0,
-    'admin_assets_url' => 0,
-    's_public_name' => 0,
-    's_file_type' => 0,
-    's_date_start' => 0,
-    's_date_end' => 0,
     'error' => 0,
     'admin_assets_add_url' => 0,
     'current_assets' => 0,
   ),
   'has_nocache_code' => false,
   'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_57208226d4e727_61803319',
+  'unifunc' => 'content_572ca2fa180d93_98892472',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_57208226d4e727_61803319')) {function content_57208226d4e727_61803319($_smarty_tpl) {?><?php echo $_smarty_tpl->getSubTemplate (((string)$_smarty_tpl->tpl_vars['tpl_folder']->value)."/header-admin.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, null, array(), 0);?>
+<?php if ($_valid && !is_callable('content_572ca2fa180d93_98892472')) {function content_572ca2fa180d93_98892472($_smarty_tpl) {?><?php echo $_smarty_tpl->getSubTemplate (((string)$_smarty_tpl->tpl_vars['tpl_folder']->value)."/header-admin.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, null, array(), 0);?>
 
 <?php echo $_smarty_tpl->getSubTemplate (((string)$_smarty_tpl->tpl_vars['tpl_folder']->value)."/admin-top.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, null, array(), 0);?>
 
@@ -44,33 +38,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
         <div class="content">
             <h2 class="tell_pb left">Assets Management</h2>
 
-            <div class="filter_holder <?php if ($_smarty_tpl->tpl_vars['searched']->value) {?>activ<?php }?>" <?php if ($_smarty_tpl->tpl_vars['searched']->value) {?>style="display:block;"<?php }?>>
-                <form id="filter_user_frm" action="<?php echo $_smarty_tpl->tpl_vars['admin_assets_url']->value;?>
-" method="get">
-                    <input type="hidden" name="action" value="admin-assets">
-                    <input type="text" name="s_public_name" class="pb_input_title" placeholder="Public name"  id="s_public_name" value="<?php echo $_smarty_tpl->tpl_vars['s_public_name']->value;?>
-"/>
-                     <select name="s_file_type" class=""  id="s_file_type" style="width: 150px!important;">
-                        <option value="">- file type -</option>
-                        <option value="image" <?php if ($_smarty_tpl->tpl_vars['s_file_type']->value=='image') {?> selected <?php }?> >image</option>
-                        <option value="document" <?php if ($_smarty_tpl->tpl_vars['s_file_type']->value=='document') {?> selected <?php }?> >document</option>
-                        <option value="sound" <?php if ($_smarty_tpl->tpl_vars['s_file_type']->value=='sound') {?> selected <?php }?> >sound</option>
-                    </select>
-                    <input type="text" name="s_date_start" class="pb_input_title datepicker" placeholder="Start Date"  id="s_date_start" value="<?php echo $_smarty_tpl->tpl_vars['s_date_start']->value;?>
-"/> -
-                    <input type="text" name="s_date_end" class="pb_input_title datepicker" placeholder="End Date"  id="s_date_end" value="<?php echo $_smarty_tpl->tpl_vars['s_date_end']->value;?>
-"/>
-                    <input type="submit" name="Submit" value="Search" class="search" />
-                    <input type="button" name="Reset" value="Reset" class="reset-btn" />
-
-                </form>
-            </div>
-
-            <div class="clear" style="height:15px;"> </div>
-
             <div><a href="javascript:void(0);"  id="new_file_trigger">Upload New File</a></div>
-
-            <div class="clear" style="height:15px;"> </div>
 
             <div class="error_message" id="asset_error_message">
 
@@ -82,7 +50,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 
             </div>
 
-            <div class="clear" ></div>
+            <div class="clear"></div>
 
             <form name="problem" id="form_files" class="form_users" action="<?php echo $_smarty_tpl->tpl_vars['admin_assets_add_url']->value;?>
 " method="post" style="display: <?php if ($_smarty_tpl->tpl_vars['error']->value) {?>block<?php } else { ?>none<?php }?>;">
@@ -124,6 +92,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
                 <?php echo '</script'; ?>
 >
             <?php }?>
+
+            <?php echo $_smarty_tpl->getSubTemplate (((string)$_smarty_tpl->tpl_vars['tpl_folder']->value)."/admin_filter_assets.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, null, array(), 0);?>
 
             <?php echo $_smarty_tpl->getSubTemplate (((string)$_smarty_tpl->tpl_vars['tpl_folder']->value)."/assets_list.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, null, array(), 0);?>
 

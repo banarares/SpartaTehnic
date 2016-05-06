@@ -1,17 +1,17 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2016-04-27 14:41:57
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2016-05-06 16:58:21
          compiled from "/var/www/akiva//tpl/admin-1000/header-admin.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:12178582925720a5851ce459-56229343%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:1489972288572ca2fd2cf443-55738104%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     'a544c71f37ef258593f2dde5edbd37190b468092' => 
     array (
       0 => '/var/www/akiva//tpl/admin-1000/header-admin.tpl',
-      1 => 1461245363,
+      1 => 1462540693,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '12178582925720a5851ce459-56229343',
+  'nocache_hash' => '1489972288572ca2fd2cf443-55738104',
   'function' => 
   array (
   ),
@@ -21,24 +21,21 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_5720a5851d7195_01019871',
+  'unifunc' => 'content_572ca2fd2d7b30_63782180',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_5720a5851d7195_01019871')) {function content_5720a5851d7195_01019871($_smarty_tpl) {?><!doctype html>
+<?php if ($_valid && !is_callable('content_572ca2fd2d7b30_63782180')) {function content_572ca2fd2d7b30_63782180($_smarty_tpl) {?><!DOCTYPE html>
 <html>
 <head>
     <title>Admin - We Share</title>
 
-    <meta name="viewport" content="width=960" />
-    <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
 
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet" >
 
     <link href="<?php echo $_smarty_tpl->tpl_vars['root_url']->value;?>
-/admin-1000/css/style_admin.css" rel="stylesheet" type="text/css" />
-    <link href="<?php echo $_smarty_tpl->tpl_vars['root_url']->value;?>
 /css/stylesheet.css" rel="stylesheet" type="text/css" />
-    <link href="<?php echo $_smarty_tpl->tpl_vars['root_url']->value;?>
-/admin-1000/css/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css" />
+    
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/themes/smoothness/jquery-ui.css">
 
     <?php echo '<script'; ?>
@@ -51,11 +48,10 @@ $_valid = $_smarty_tpl->decodeProperties(array (
  src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"><?php echo '</script'; ?>
 >
 
-    <!--<?php echo '<script'; ?>
+    <?php echo '<script'; ?>
  src="<?php echo $_smarty_tpl->tpl_vars['root_url']->value;?>
-/admin-1000/js/bootstrap-datepicker.min.js"><?php echo '</script'; ?>
->-->
-
+/ckeditor/ckeditor.js"><?php echo '</script'; ?>
+>
     <?php echo '<script'; ?>
  src="<?php echo $_smarty_tpl->tpl_vars['root_url']->value;?>
 /admin-1000/js/main_admin.js"><?php echo '</script'; ?>
@@ -66,6 +62,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 >
     <link rel="stylesheet" href="<?php echo $_smarty_tpl->tpl_vars['root_url']->value;?>
 /SlickNav/dist/slicknav.min.css" />
+    <link href="<?php echo $_smarty_tpl->tpl_vars['root_url']->value;?>
+/admin-1000/css/style_admin.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="<?php echo $_smarty_tpl->tpl_vars['root_url']->value;?>
 /bxslider/jquery.bxslider.css" />
     <?php echo '<script'; ?>
@@ -76,5 +74,6 @@ $_valid = $_smarty_tpl->decodeProperties(array (
  src="<?php echo $_smarty_tpl->tpl_vars['root_url']->value;?>
 /bxslider/jquery.bxslider.min.js"><?php echo '</script'; ?>
 >
+
 </head>
 <?php }} ?>

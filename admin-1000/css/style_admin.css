@@ -4,17 +4,31 @@
 .format_actions{ width:40px; }
 .format_name{ width:180px; }
 .format_ip{ width:130px; }
-
+.format_type{ width:90px }
+.format_dimensions{ width:130px }
+.nav-up {
+    top: -90px;
+}
 #list_results_usergroups{ width:100%;margin-left:auto;margin-right:auto; }
+#status { width:100%;margin-left:auto;margin-right:auto; }
 #list_results_usergroups .table {  margin-left:auto;margin-right:auto;  }
+.glyphicon-alert{ display:inline-block; width:10px; position: relative; float:left; }
 .arrow_up_idle{  background: url("http://akiva.linuxserv.space/img/arrow-down-idle.png") no-repeat fixed center; display:inline-block; }
 input[type="number"].search_user_id { border:1px solid #ccc;font-size:12pt; }
 input[type="text"].search_user_name { border:1px solid #ccc;font-size:12pt; }
 input[type="text"].search_user_email { border:1px solid #ccc;font-size:12pt; }
-
+input.radio-inline{ width: 20px !important; height: 20px !important; border:1px solid #444; display:inline-block; position:relative; margin:0; padding:0; border-radius:10px; }
+input.radio-inline:checked{ color:#fff; 
+    background: #333;  
+    box-shadow:0 0 4px deepSkyBlue;
+    border-color:white; } 
+select[name="s_category_id"] { margin-bottom:10px; }
+select[name="s_status"] {}
+ul#admin_top_menu li ul{ top:-15px; z-index:2; }
+input.radio-inline:after{ color:#fff; content:"✓";     font-size:15px;     line-height:20px;     text-align:center; }
 .filter_mode{ float:right; }
-.search_button{ background:#104a91; color:#ccc; border-radius:4px; border:0;padding:5px; }
-.reset_button{ background:#ccc; color:#333; border-radius:4px; border:0;padding:5px; width:100%;  }
+.search_button{ background:#104a91; color:#ccc; border-radius:4px; border:0;padding:5px;  margin-bottom:10px; }
+.reset_button{ background:#ccc; color:#333; border-radius:4px; border:0;padding:5px; width:100%; margin:0;   }
 .search_button a{ color:#fff; }
 .reset_button a{ color:#333; }
 .search_button:hover  { background:#06254c; color:#fff; }
@@ -35,7 +49,7 @@ select#usergroup_selection  { color:#2b3a42; padding-left:5px; padding-right:15p
 .filter-wrapper{ margin-bottom:20px; }
 .filter-wrapper input[type=text]{ margin-bottom:10px; }
 #admin_top_menu{   margin-top:-120px; }
-#meniu-top{   width:300px;   position:absolute;   top:20px;   right:300px;   margin-left:auto; }
+#meniu-top{   width:100%; position:absolute; top:20px; right:100px; }
 
 /*	clearfix			*/
 .clearfix{_height: 1%; _overflow: visible;}
@@ -394,6 +408,7 @@ a.edit i {
     .slide-text h1 {font-size: 41px;}
     .slide-text p {font-size: 20px;}
     .footer-nav > li {margin: 0 12px;}
+
 }
 
 
@@ -504,7 +519,21 @@ a.edit i {
 /* Note: Design for a width of 320px */
 
 @media only screen and (max-width: 767px) {
-    .slicknav_menu {display: block;}
+    header{ transition: top 0.2s ease-in-out; background: #ccc; width:100%;
+    height: 80px;
+    position: fixed;
+    top: 0; z-index:1; }
+    .content{ margin-top:110px; }
+    ul.slicknav_nav{ padding-bottom:0; }
+    #meniu-top{ float:right;margin:0; padding:0; width:100%; }
+    .slicknav_menu {display: block;  height:50px;width:50px; top:15px; padding-left:15px; padding-right:15px; text-align:left; }
+    .content-menu {display: none; }
+    .slicknav_menutxt {display: none;}
+    .slicknav_menu .slicknav_icon {display: block;}
+    .slicknav_menu .slicknav_no-text  {margin: 0;}
+    .slicknav_menu .slicknav_icon-bar {display: block;}
+    .slicknav_btn .slicknav_icon-bar + .slicknav_icon-bar {display: block;}
+    .slicknav_nav{ width:100%;margin-left:90px;margin-top:10px; border-left:2px solid #333; }
     .navi {display: none;}
     .header-icons {padding-right: 60px;}
     .main-buttons {position: static; width: 100%;}
@@ -976,10 +1005,7 @@ div[name='youtubePlugin'] input[type="radio"], div[name='youtubePlugin'] input[t
     vertical-align: top;
 }
 
-form input[type="radio"], form input[type="checkbox"]{
-    height: auto !important;
-    width: auto !important;
-}
+
 .checkbox-inline {
     width: 20%;
     text-align: left;
@@ -999,11 +1025,7 @@ form input[type="radio"], form input[type="checkbox"]{
 .meniu-footer li:after {
     content: ' | ';
 }
-#meniu-top {
-    float: right;
-    width: 350px;
-    margin-right: 20px;
-}
+
 .content-wrap.top-menu {
     margin-bottom:0px;
     padding: 30px 0;

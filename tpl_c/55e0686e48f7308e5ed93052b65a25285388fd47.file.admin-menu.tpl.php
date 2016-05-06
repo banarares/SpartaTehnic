@@ -1,17 +1,17 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2016-04-27 14:41:57
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2016-05-06 16:58:21
          compiled from "/var/www/akiva//tpl/admin-1000/admin-menu.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:16053336585720a5851e7c84-25340853%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:310346533572ca2fd2e9503-38958941%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     '55e0686e48f7308e5ed93052b65a25285388fd47' => 
     array (
       0 => '/var/www/akiva//tpl/admin-1000/admin-menu.tpl',
-      1 => 1461579263,
+      1 => 1462540416,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '16053336585720a5851e7c84-25340853',
+  'nocache_hash' => '310346533572ca2fd2e9503-38958941',
   'function' => 
   array (
   ),
@@ -19,6 +19,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   array (
     'action' => 0,
     'admin_actions_url' => 0,
+    'admin_articles_url' => 0,
+    'admin_categories_url' => 0,
     'admin_errors_url' => 0,
     'is_admin' => 0,
     'admin_users_url' => 0,
@@ -30,18 +32,26 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_5720a5851fcbb9_84046087',
+  'unifunc' => 'content_572ca2fd301b45_58101368',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_5720a5851fcbb9_84046087')) {function content_5720a5851fcbb9_84046087($_smarty_tpl) {?><div class="clear"> </div>
+<?php if ($_valid && !is_callable('content_572ca2fd301b45_58101368')) {function content_572ca2fd301b45_58101368($_smarty_tpl) {?><div class="clear"> </div>
 
-	<div class="content " >
+	<div class="content-menu content" >
         
             <ul class="meniu-footer menu_slicknav" id="admin_top_menu">
                 <li <?php if ($_smarty_tpl->tpl_vars['action']->value=='admin-actions') {?>class="active"<?php }?>><a href="<?php echo $_smarty_tpl->tpl_vars['admin_actions_url']->value;?>
 " >Actions </a></li>
+                <li><a href="#" >Blog </a>
+                    <ul> 
+                    <li <?php if ($_smarty_tpl->tpl_vars['action']->value=='admin-articles') {?>class="active" <?php }?>><a href="<?php echo $_smarty_tpl->tpl_vars['admin_articles_url']->value;?>
+">Blog Articles</a></li>
+                    <li <?php if ($_smarty_tpl->tpl_vars['action']->value=='admin-categories') {?>class="active" <?php }?>><a href="<?php echo $_smarty_tpl->tpl_vars['admin_categories_url']->value;?>
+">Blog Categories</a></li>
+                    </ul>
+                </li>
                 <li <?php if ($_smarty_tpl->tpl_vars['action']->value=='admin-errors') {?>class="active"<?php }?>><a href="<?php echo $_smarty_tpl->tpl_vars['admin_errors_url']->value;?>
 " >Errors Log </a></li>
-                <li  <?php if ($_smarty_tpl->tpl_vars['action']->value=='admin-users'||$_smarty_tpl->tpl_vars['action']->value=='admin-usergroup') {?> class="active"<?php }?>><a href="#" >Users</a>
+                <li><a href="#" >Users</a>
                             
                             <ul> 
                                 <?php if ($_smarty_tpl->tpl_vars['is_admin']->value) {?>
@@ -50,11 +60,10 @@ $_valid = $_smarty_tpl->decodeProperties(array (
                                 
                                 <li <?php if ($_smarty_tpl->tpl_vars['action']->value=='admin-usergroup') {?>class="active" <?php }?>><a href="<?php echo $_smarty_tpl->tpl_vars['admin_usergroup_url']->value;?>
 " >User groups</a></li>
-                                <li <?php if ($_smarty_tpl->tpl_vars['action']->value=='admin-users') {?>class="active" <?php }?>><a href="<?php echo $_smarty_tpl->tpl_vars['admin_usergroup_actions_url']->value;?>
+                                <li <?php if ($_smarty_tpl->tpl_vars['action']->value=='admin-usergroup-actions') {?>class="active" <?php }?>><a href="<?php echo $_smarty_tpl->tpl_vars['admin_usergroup_actions_url']->value;?>
 " >User group Actions</a></li>
                                 <?php }?>
-                            </ul>
-                            
+                            </ul>             
          
                 </li>      
                     

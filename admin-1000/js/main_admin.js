@@ -12,13 +12,48 @@ if(typeof $.fn.modal != 'undefined') {
         })
     };
 }
- 
-  
 
 $(document).ready(function()
 {   
 
- 
+    // Hide Header on on scroll down
+var didScroll;
+var lastScrollTop = 0;
+var delta = 5;
+var navbarHeight = $('header').outerHeight();
+
+$(window).scroll(function(event){
+    didScroll = true;
+});
+
+setInterval(function() {
+    if (didScroll) {
+        hasScrolled();
+        didScroll = false;
+    }
+}, 250);
+
+function hasScrolled() {
+    var st = $(this).scrollTop();
+    
+    // Make sure they scroll more than delta
+    if(Math.abs(lastScrollTop - st) <= delta)
+        return;
+    
+    // If they scrolled down and are past the navbar, add class .nav-up.
+    // This is necessary so you never see what is "behind" the navbar.
+    if (st > lastScrollTop && st > navbarHeight){
+        // Scroll Down
+        $('header').removeClass('nav-down').addClass('nav-up');
+    } else {
+        // Scroll Up
+        if(st + $(window).height() < $(document).height()) {
+            $('header').removeClass('nav-up').addClass('nav-down');
+        }
+    }
+    
+    lastScrollTop = st;
+}
 
     $("#filter").submit(function(event) { 
 
@@ -95,6 +130,7 @@ $(document).ready(function()
         var s_description = $('input[name=s_description]').val();
         var filter = $('input[name=filter]').val(); 
         var sort = $('input[name=sort]').val();
+
        
       var posting = $.get( url, { s_name: s_name } );
 
@@ -106,6 +142,7 @@ $(document).ready(function()
         $(s_description).val(s_description);
         $(sort).val(sort);
         $(filter).val(filter);      
+    
 
 
         if(s_date_start == "" || s_date_end == ""  || (s_date_end !=="" && s_date_start !=="" && s_date_start <= s_date_end))
@@ -128,8 +165,240 @@ $(document).ready(function()
         });
     });
 
-    //#filter_usergroups
+    $("#filter_articles").submit(function(event) {
+       
+      /* stop form from submitting normally */
+      event.preventDefault();
+ 
+      /* get some values from elements on the page: */
+      var $form = $( this ), url = $form.attr( 's_name' );
 
+        // Send the data using GET
+        var page_id = 1;
+        var s_id = $('input[name=s_id]').val();
+        var s_title = $('input[name=s_title]').val(); 
+        var s_short_title = $('input[name=s_short_title]').val();
+        var s_category_id = $('select[name=s_category_id]').val();
+        var s_date_start = $('input[name=s_date_start]').val();
+        var s_date_end = $('input[name=s_date_end]').val();
+        var s_status = $('select[name=s_status]').val();
+        var filter = getUrlParameter('filter');
+        
+
+
+        var sort = getUrlParameter('sort');
+       
+      var posting = $.get( url, { s_title: s_title, filter: filter } );
+
+      /* Alerts the results */
+      posting.done(function( data ) {
+
+        $(s_id).val(s_id);
+        $(s_title).val(s_title);
+        $(s_short_title).val(s_short_title);
+        $(s_category_id).val(s_category_id);
+        $(sort).val(sort);
+        $(filter).val(filter);
+        $(s_status).val(s_status);
+
+        if(s_date_start == "" || s_date_end == ""  || (s_date_end !=="" && s_date_start !=="" && s_date_start <= s_date_end))
+        {
+            if(filter == 'undefined' || filter == ''){
+                filter = 'article_id';
+            }
+            if(s_status == 'undefined' || s_status == ''){
+                s_status = '';
+            }          
+
+            window.location.href = '?action=admin-articles'
+            +'&pageId='+ page_id
+            +'&s_id='+ s_id
+            +"&s_title="+s_title                       
+            +"&s_short_title="+s_short_title           
+            +"&s_category_id="+s_category_id           
+            +"&sort="+sort           
+            +"&filter="+filter           
+            +"&s_date_start="+s_date_start
+            +"&s_date_end="+s_date_end
+            +"&s_status="+s_status;
+             
+        }else{
+            alert('The start date must be less or equal with the end date. Please check the start date and the end date. Thank you');
+        }
+
+        });
+    });
+
+    $("#filter_categories").submit(function(event) {
+       
+      /* stop form from submitting normally */
+      event.preventDefault();
+ 
+      /* get some values from elements on the page: */
+      var $form = $( this ), url = $form.attr( 's_name' );
+
+        // Send the data using GET
+        var page_id = 1;
+        var s_id = $('input[name=s_id]').val();
+        var s_name = $('input[name=s_name]').val();
+        var status = $('select[name=status]').val();
+        var s_date_start = $('input[name=s_date_start]').val();
+        var s_date_end = $('input[name=s_date_end]').val();
+        
+        var filter = getUrlParameter('filter');
+        var sort = getUrlParameter('sort');
+       
+      var posting = $.get( url, { s_name: s_name } );
+
+      /* Alerts the results */
+      posting.done(function( data ) {
+
+        $(s_id).val(s_id);
+        $(s_name).val(s_name);
+        $(sort).val(sort);
+        $(filter).val(filter);      
+
+ 
+        if(s_date_start == "" || s_date_end == ""  || (s_date_end !=="" && s_date_start !=="" && s_date_start <= s_date_end))
+        {
+
+            window.location.href = '?action=admin-categories'
+            +'&pageId='+ page_id
+            +'&s_id='+ s_id
+            +"&s_name="+s_name                       
+            +"&status="+status           
+            +"&sort="+sort           
+            +"&filter="+filter           
+            +"&s_date_start="+s_date_start
+            +"&s_date_end="+s_date_end;
+             
+        }else{
+            alert('The start date must be less or equal with the end date. Please check the start date and the end date. Thank you');
+        }
+
+        });
+    });
+
+    $("#filter_assets").submit(function(event) {
+       
+      /* stop form from submitting normally */
+      event.preventDefault();
+ 
+      /* get some values from elements on the page: */
+      var $form = $( this ), url = $form.attr( 's_name' );
+
+        // Send the data using GET
+        var page_id = 1;
+        var s_asset_id = $('input[name=s_asset_id]').val();
+        var s_name = $('input[name=s_name]').val();
+        var s_description = $('input[name=s_description]').val();
+        var s_date_start = $('input[name=s_date_start]').val();
+        var s_date_end = $('input[name=s_date_end]').val();
+        var s_file_type = $('select[name=s_file_type]').val();
+        var s_description = $('input[name=s_description]').val();
+        
+        var filter = $('input[name=filter]').val(); 
+        var sort = $('input[name=sort]').val();
+       
+      var posting = $.get( url, { s_name: s_name, s_description: s_description } );
+
+      /* Alerts the results */
+      posting.done(function( data ) {
+
+        $(s_asset_id).val(s_asset_id);
+        $(s_name).val(s_name);
+        $(s_description).val(s_description);
+        $(sort).val(sort);
+        $(s_file_type).val(s_file_type);
+        $(filter).val(filter);      
+
+ 
+        if(s_date_start == "" || s_date_end == ""  || (s_date_end !=="" && s_date_start !=="" && s_date_start <= s_date_end))
+        {
+
+            window.location.href = '?action=admin-assets'
+            +'&pageId='+ page_id
+            +'&s_asset_id='+ s_asset_id
+            +"&s_name="+s_name                       
+            +"&s_description="+s_description // admin or regular_user
+            +"&sort="+sort           
+            +"&filter="+filter           
+            +"&s_file_type="+s_file_type
+            +"&s_date_start="+s_date_start
+            +"&s_date_end="+s_date_end;
+             
+        }else{
+            alert('The start date must be less or equal with the end date. Please check the start date and the end date. Thank you');
+        }
+
+        });
+    });
+
+    //#filter_usergroups
+    $("#filter_assets_browse").submit(function(event) {
+       
+      /* stop form from submitting normally */
+      event.preventDefault();
+ 
+      /* get some values from elements on the page: */
+      var $form = $( this ), url = $form.attr( 's_name' );
+
+        // Send the data using GET
+        var page_id = 1;
+        var s_asset_id = $('input[name=s_asset_id]').val();
+        var s_name = $('input[name=s_name]').val();
+        var s_description = $('input[name=s_description]').val();
+        var s_date_start = $('input[name=s_date_start]').val();
+        var s_date_end = $('input[name=s_date_end]').val();
+        var s_file_type = $('select[name=s_file_type]').val();
+        var s_description = $('input[name=s_description]').val();
+        
+        var filter = $('input[name=filter]').val(); 
+        var sort = $('input[name=sort]').val();
+
+        var source = getUrlParameter('source');
+        var type = getUrlParameter('type');
+        var input_file_url = getUrlParameter('input_file_url');
+        var CKEditor = $('input[name=CKEditor]').val();
+        var CKEditorFuncNum = $('input[name=CKEditorFuncNum]').val();
+ 
+      var posting = $.get( url, { s_name: s_name, s_description: s_description } );
+
+      /* Alerts the results */
+      posting.done(function( data ) {
+
+        $(s_asset_id).val(s_asset_id);
+        $(s_name).val(s_name);
+        $(s_description).val(s_description);
+        $(sort).val(sort);
+        $(s_file_type).val(s_file_type);
+        $(filter).val(filter);      
+  
+ 
+        if(s_date_start == "" || s_date_end == ""  || (s_date_end !=="" && s_date_start !=="" && s_date_start <= s_date_end))
+        {
+
+            window.location.href = '?pageId='+ page_id
+            +'&source='+ source
+            +'&type='+ type
+            +'&input_file_url='+ input_file_url
+            +'&s_asset_id='+ s_asset_id
+            +"&s_name="+s_name                       
+            +"&s_description="+s_description // admin or regular_user
+            +"&sort="+sort           
+            +"&filter="+filter           
+            +"&s_file_type="+s_file_type
+            +"&s_date_start="+s_date_start
+            +"&CKEditor="+CKEditor
+            +"&CKEditorFuncNum="+CKEditorFuncNum
+            ;
+             
+        }else{
+            alert('The start date must be less or equal with the end date. Please check the start date and the end date. Thank you');
+        }
+
+        });
+    });
    
 
 
@@ -828,6 +1097,74 @@ function article_item(article_id, action_type, event)
     $('#articleModal').modal('show');
 }
 
+
+
+
+function save_article(form_id)
+{
+    editor_name = 'version_1';
+    var editorText = CKEDITOR.instances[editor_name].getData();
+    // alert(editorText);
+    $("#"+form_id+" #version_1").val(editorText);    
+
+    item_value = $("#"+form_id+" #social_media_image").val();
+    var item_value_uploaded = $('#social_media_image_upload')[0].files[0];
+    if (typeof item_value_uploaded != 'undefined')
+    {
+        image_type = item_value_uploaded.type
+        if (image_type.toLowerCase().indexOf("image") == -1)
+        {
+            alert('Please upload an image file (jpg, gif, png)');
+            return false;
+        }
+        if (item_value != '' && item_value_uploaded.name != '') {
+            if (confirm('You will replace the file with this new one! Are you sure?'))
+            {
+
+            }
+            else
+            {
+                return false;
+            }
+        }
+    }
+
+    var m_data = new FormData();
+    m_data.append( 'article_id', $("#"+form_id+" #article_id").val());
+    m_data.append( 'page_no', $("#"+form_id+" #page_no").val());
+    m_data.append( 'category_id', $("#"+form_id+" #category_id").val());
+    m_data.append( 'title', $("#"+form_id+" #title").val());
+    m_data.append( 'short_title', $("#"+form_id+" #short_title").val());
+    m_data.append( 'meta_description', $("#"+form_id+" #meta_description").val());
+    m_data.append( 'version_1', editorText);
+
+    m_data.append( 'is_primary', $('input[name=is_primary]:checked').val());
+    m_data.append( 'display_order', $("#"+form_id+" #display_order").val());
+    m_data.append( 'status', $("#"+form_id+" #status").val());
+
+    m_data.append( 'social_media_image', $("#"+form_id+" #social_media_image").val());
+    m_data.append( 'social_media_image_upload', item_value_uploaded);
+
+    $.ajax({
+        url: '/admin-1000/ajax/save_article.php',
+        type: 'POST',
+        data: m_data,
+        cache: false,
+        dataType:'json',
+        processData: false,
+        contentType: false,
+        success: function(result) {
+            if (result.response == 'ok') {
+                window.location.reload(true);
+            }
+            else
+            {
+                $("#articleModalBody #error_message").html(result.response );
+            }
+        }
+    });
+}
+
 function delete_article_item(article_id, event)
 {
     event.stopPropagation();
@@ -915,6 +1252,25 @@ function move_article_item(article_id, position, event)
     });
 
 }
+
+function move_category_item(category_id, position, event)
+{
+    event.stopPropagation();
+    event.preventDefault();
+
+    $("#"+category_id+"_content").hide();
+
+    $.ajax({
+        url: '/admin-1000/ajax/category-move.php?position='+position+'&category_id='+category_id,
+        type: 'GET',
+        cache: false,
+        dataType:'json',
+        success: function(result) {
+            window.location.reload(true);
+        }
+    });
+}
+
 
 function toggle_content(article_id)
 {
@@ -1021,10 +1377,18 @@ function pagination_articles(page_id)
     }
     //get all filter parameters
     var s_title = getUrlParameter('s_title');
+    var s_short_title = getUrlParameter('s_short_title');
     var s_date_start = getUrlParameter('s_date_start');
     var s_date_end = getUrlParameter('s_date_end');
+    var s_id = getUrlParameter('s_id');
+    var s_category_id = getUrlParameter('s_category_id');
+    var sort = getUrlParameter('sort');
+    var filter = getUrlParameter('filter');
+    var s_status = getUrlParameter('s_status');
 
-
+    if(filter=='undefined'){
+        filter='article_id';
+    }
     //console.log(window.location.hash);
     // return false;
     $("#loading").show();
@@ -1032,7 +1396,17 @@ function pagination_articles(page_id)
     $.ajax({
         type: 'POST',
         url: '/admin-1000/ajax/show-articles.php',
-        data: 'pageId='+ page_id+"&s_title="+s_title+"&s_date_start="+s_date_start+"&s_date_end="+s_date_end,
+        data: 'pageId='+ page_id
+        +"&s_id="+s_id
+        +"&s_title="+s_title
+        +"&s_short_title="+s_short_title
+        +"&s_category_id="+s_category_id
+        +"&s_date_start="+s_date_start
+        +"&s_date_end="+s_date_end
+        +"&filter="+filter
+        +"&sort="+sort
+        +"&s_status="+s_status
+        ,
         success: function(response)
         {
             $("#list_results").html(response);
@@ -1105,6 +1479,175 @@ function next_articles()
 
 //======== END Articles ========
 
+/* ASSETS IN BROWSER */
+function current_browse_assets()
+{
+    var result= check_url();
+
+    if(result!="" || result!='undefined' || typeof(result)!='undefined')
+    {
+        //result= parseInt(result);
+        var prev_item =  result;
+    }
+    else
+    {
+        var prev_item  = 1;
+    }
+
+    if (prev_item > 0)
+    {
+        pagination_browse_assets(prev_item);
+    }
+
+}
+
+function prev_browse_assets(page_list, type)
+{
+    var result= check_url();
+
+    if(result!="" || result!='undefined' || typeof(result)!='undefined')
+    {
+        //result= parseInt(result);
+        var prev_item =  result-1;
+    }
+    else
+    {
+        var prev_item  = 0;
+    }
+
+    if (prev_item >= 0)
+    {
+        pagination_browse_assets(prev_item,page_list, type);
+    }
+
+
+}
+
+function next_browse_assets(page_list, type)
+{
+    var result= check_url();
+
+    if(result!="" || result!='undefined' || typeof(result)!='undefined')
+    {
+        result=parseInt(result);
+        var next_item =result+1;
+        var last_page= $('.last_item').html();
+        last_page=parseInt(last_page);
+
+        if(next_item>last_page)
+        {
+            next_item=last_page;
+
+        }
+    }
+    else
+    {
+        var next_item  = 0;
+    }
+    if (result <= last_page ) {
+        pagination_browse_assets(next_item,page_list, type);
+    }
+
+
+}
+
+function pagination_browse_assets(page_id,page_list, type)
+{
+    var url = window.location.href;
+
+    //console.log(url);
+    //console.log(window.location.hash);
+    if (page_id)
+    {
+        window.location.hash='pagina='+$("#"+page_id).attr('id');
+        window.location.hash='pagina='+page_id;
+
+    }
+
+    var s_asset_id = getUrlParameter('s_asset_id');
+    var s_name = getUrlParameter('s_name');
+    var s_description = getUrlParameter('s_description');
+    var s_file_type = getUrlParameter('s_file_type');
+    var s_date_start = getUrlParameter('s_date_start');
+    var s_date_end = getUrlParameter('s_date_end');
+    var sort = getUrlParameter('sort');
+    var filter = getUrlParameter('filter');
+    var source = getUrlParameter('source');
+    
+    if(typeof source == 'undefined')
+    {
+        source = '';
+    }
+
+    if(typeof s_asset_id == 'undefined')
+    {
+        s_asset_id = '';
+    }
+
+    if(typeof s_name == 'undefined')
+    {
+        s_name = '';
+    }
+    if(typeof s_description == 'undefined')
+    {
+        s_description = '';
+    }
+    if(typeof s_file_type == 'undefined')
+    {
+        s_file_type = '';
+    }
+    if(typeof s_date_start == 'undefined')
+    {
+        s_date_start = '';
+    }
+
+    if(typeof s_date_end == 'undefined')
+    {
+        s_date_end = '';
+    }
+
+
+    var urlPath;
+    
+        urlPath = '/admin-1000/browse.php?type='+s_file_type+"&source="+source;
+
+
+    $("#loading").show();
+    $("#list_results").hide();
+    $.ajax({
+        type: 'POST',
+        url: urlPath,
+        data: 'pageId='+ page_id+
+        "&s_asset_id="+s_asset_id+
+        "&s_name="+s_name+
+        "&s_description="+s_description+       
+        "&s_file_type="+s_file_type+
+        "&s_date_start="+s_date_start+
+        "&s_date_end="+s_date_end+
+        "&sort="+sort+
+        "&source="+source+        
+        "&type="+type+        
+        "&input_file_url="+input_file_url+        
+        "&filter="+filter,
+ 
+        success: function(response)
+        {
+            $("#list_results").html(response);
+            $("#list_results h2").remove();
+
+            //console.log(page_id);
+            $(".list_pagination li a").removeClass("curent_item").addClass("pagination_item");
+            $(".list_pagination li").removeClass("curent_item");
+            $("#"+page_id).removeClass("pagination_item").addClass("curent_item");
+            $("#"+page_id+"botom").removeClass("pagination_item").addClass("curent_item");
+
+            $("#loading").hide();
+            $("#list_results").show();
+
+        }
+    });
+}
+/*END BROWSE ACTIONS */
 
 
 /*START ASSETS ACTIONS */
@@ -1129,6 +1672,8 @@ function current_assets()
     }
 
 }
+
+
 
 function prev_assets(page_list, type)
 {
@@ -1243,15 +1788,34 @@ function pagination_assets(page_id,page_list, type)
         window.location.hash='pagina='+page_id;
 
     }
-    //get all filter parameters
-    var s_public_name = getUrlParameter('s_public_name');
+
+    var s_asset_id = getUrlParameter('s_asset_id');
+    var s_name = getUrlParameter('s_name');
+    var s_description = getUrlParameter('s_description');
     var s_file_type = getUrlParameter('s_file_type');
     var s_date_start = getUrlParameter('s_date_start');
     var s_date_end = getUrlParameter('s_date_end');
-
-    if(typeof s_public_name == 'undefined')
+    var sort = getUrlParameter('sort');
+    var filter = getUrlParameter('filter');
+    var source = getUrlParameter('source');
+    
+    if(typeof source == 'undefined')
     {
-        s_public_name = '';
+        source = '';
+    }
+
+    if(typeof s_asset_id == 'undefined')
+    {
+        s_asset_id = '';
+    }
+
+    if(typeof s_name == 'undefined')
+    {
+        s_name = '';
+    }
+    if(typeof s_description == 'undefined')
+    {
+        s_description = '';
     }
     if(typeof s_file_type == 'undefined')
     {
@@ -1261,29 +1825,40 @@ function pagination_assets(page_id,page_list, type)
     {
         s_date_start = '';
     }
+
     if(typeof s_date_end == 'undefined')
     {
         s_date_end = '';
     }
 
-    //console.log(window.location.hash);
-    // return false;
 
     var urlPath;
     if (page_list == 'browser')
     {
-        urlPath = '/admin-1000/browse.php?type='+type;
+
+        urlPath = '/admin-1000/browse.php?type='+s_file_type+'&source='+source;
     }
     else
     {
         urlPath = '/admin-1000/ajax/show-assets.php';
     }
+
     $("#loading").show();
     $("#list_results").hide();
     $.ajax({
         type: 'POST',
         url: urlPath,
-        data: 'pageId='+ page_id+"&s_file_type="+s_file_type+"&s_public_name="+s_public_name+"&s_date_start="+s_date_start+"&s_date_end="+s_date_end,
+        data: 'pageId='+ page_id+
+        "&s_asset_id="+s_asset_id+
+        "&s_name="+s_name+
+        "&s_description="+s_description+       
+        "&s_file_type="+s_file_type+
+        "&s_date_start="+s_date_start+
+        "&s_date_end="+s_date_end+
+        "&sort="+sort+
+        "&source="+source+        
+        "&filter="+filter,
+ 
         success: function(response)
         {
             $("#list_results").html(response);
@@ -2466,4 +3041,266 @@ function delete_setting_item(setting_id)
 }
 //======== END SETTINGS ========
 
+//======== START Categories ========
+
+function current_categories()
+{
+    var result= check_url();
+
+    if(result!="" || result!='undefined' || typeof(result)!='undefined')
+    {
+        //result= parseInt(result);
+        var prev_item =  result;
+    }
+    else
+    {
+        var prev_item  = 1;
+    }
+
+    if (prev_item > 0)
+    {
+        pagination_categories(prev_item,'admin');
+    }
+
+
+}
+  
+function pagination_categories(page_id,type)
+{
+
+
+    var url = window.location.href;
+
+    //console.log(url);
+    //console.log(window.location.hash);
+    if (page_id)
+    {
+        //window.location.hash='pagina='+$("#"+page_id).attr('id');
+        if (page_id > 0 ) {
+            window.location.hash='pagina='+page_id;
+        }
+
+    }
+
+    //get all filter parameters
+    var s_id = getUrlParameter('s_id');
+    var s_name = getUrlParameter('s_name');
+    var s_date_start = getUrlParameter('s_date_start');
+    var s_date_end = getUrlParameter('s_date_end');
+    var filter = getUrlParameter('filter');
+    var sort = getUrlParameter('sort');
+    var status = getUrlParameter('status');
+
+    if(s_date_start=='undefined')
+    {
+        s_date_start='';
+    }
+    if(s_date_end=='undefined')
+    {
+        s_date_end='';
+    }
+
+    if(sort=='undefined'){
+        sort='1';
+    }
+    if(filter=='undefined'){
+        filter='category_id';
+    }
+    $("#loading").show();
+    $("#list_results").hide();
+        /* attach a submit handler to the form */
+
+    $.ajax({
+        type: 'GET',
+        url: '/admin-1000/ajax/show-categories.php',
+        data: 'pageId='+ page_id+
+        "&type="+type+
+        "&s_id="+s_id+
+        "&s_name="+s_name+
+        "&filter="+filter+
+        "&sort="+sort+
+        "&status="+status+
+        "&s_date_start="+s_date_start+
+        "&s_date_end="+s_date_end,
+ 
+        success: function(response)
+        {
+            $("#list_results").html(response);
+            $(".list_pagination li a").removeClass("curent_item").addClass("pagination_item");
+            $(".list_pagination li").removeClass("curent_item");
+            $("#"+page_id).removeClass("pagination_item").addClass("curent_item");
+            $("#"+page_id+"botom").removeClass("pagination_item").addClass("curent_item");
+
+            $("#loading").hide();
+            $("#list_results").show();
+
+            
+
+        }
+    });
+}
+
+
+
+function prev_categories(type)
+{
+    var result= check_url();
+
+    if(result!="" || result!='undefined' || typeof(result)!='undefined')
+    {
+        //result= parseInt(result);
+        var prev_item =  result-1;
+    }
+    else
+    {
+        var prev_item  = 0;
+    }
+
+    if (prev_item >= 0)
+    {
+        var url = window.location.href;
+        var sort = url.match("type=[a-z]+");
+
+        if(type)
+        {
+            switch(type)
+            {
+                case 'admin':
+                case 'users':
+                    break;
+            }
+
+        }
+        else
+        {
+            type="admin";
+        }
+
+        pagination_categories(prev_item,type);
+    }
+
+
+}
+
+
+function next_categories(type)
+{
+    var result= check_url();
+
+    if(result!="" || result!='undefined' || typeof(result)!='undefined')
+    {
+        result=parseInt(result);
+        var next_item =result+1;
+        var last_page= $('.last_item').html();
+        last_page=parseInt(last_page);
+
+        if(next_item>last_page)
+        {
+            next_item=last_page;
+
+        }
+    }
+    else
+    {
+        var next_item  = 0;
+    }
+    if (result <= last_page ) {
+        var url = window.location.href;
+        var sort = url.match("type=[a-z]+");
+
+        if(type)
+        {
+            switch(type)
+            {
+                case 'admin':
+                case 'users':
+                    break;
+            }
+
+        }
+        else
+        {
+            type="admin";
+        }
+
+        pagination_categories(next_item,type);
+    }
+
+
+}
+
+function category_item(category_id, action_type)
+{
+
+    $.ajax({
+        url: '/admin-1000/ajax/get_category_form.php?category_id='+category_id+'&action_type='+action_type,
+        type: 'GET',
+        cache: false,
+        dataType:'json',
+        success: function(result) {
+            if (action_type == 'add')
+            {
+                $("#categoryModalLabel").html('Add category');
+            }
+            else
+            {
+                $("#categoryModalLabel").html('Edit category');
+            }
+            $("#categoryModal #frm_modal_btn").removeAttr("onclick");
+            $("#categoryModal #frm_modal_btn").off("click");
+            $("#categoryModal #frm_modal_btn").on("click", function () {
+                save_category('frm_category');
+            });
+            $("#categoryModalBody").html( result.modal_body );
+        }
+    });
+    $('#categoryModal').modal('show');
+}
+
+function save_category(form_id)
+{
+
+    $.ajax({
+        url: '/admin-1000/ajax/save_category.php',
+        type: 'POST',
+        data: $('#'+form_id).serialize(),
+        cache: false,
+        dataType:'json',
+        success: function(result) {
+            if (result.response == 'ok') {
+                window.location.reload(true);
+            }
+            else
+            {
+                $("#categoryModalBody #error_message").html(result.response );
+            }
+        }
+    });
+}
+
+function delete_category_item(category_id)
+{
+    if (confirm('Are you sure you want to delete this category?'))
+    {
+        $.ajax({
+            url: '/admin-1000/ajax/delete-category.php?category_id='+category_id,
+            type: 'GET',
+            cache: false,
+            dataType:'json',
+            success: function(result) {
+                if (result.response == "ok")
+                {
+                    window.location.reload(true);
+                }else{                    
+                    alert(result.response);
+                }
+            }
+        });
+    }
+    else
+    {
+        return false;
+    }
+}
+//======== END Categories ========
 

@@ -34,7 +34,7 @@
             <ul class="nav nav-pills navigation-list" id="menu"  >
                 <li><a href="#">Find</a></li>
                 <li><a href="#">Join</a></li>
-                <li><a href="#">Blog</a></li>
+                <li><a href="?action=all-blogs">Blog</a></li>
                 <li><a href="#">Success stories</a></li>
                 <li><a href="#">FAQ</a></li>
                 <li><a href="#">About us</a></li>
